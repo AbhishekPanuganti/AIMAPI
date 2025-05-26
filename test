@@ -1,0 +1,9 @@
+| **Work Item**                       | **Status**  | **ETA to Complete**    | **Support/Resources Required**               | **Remarks**                          |
+| ----------------------------------- | ----------- | ---------------------- | -------------------------------------------- | ------------------------------------ |
+| Migrate Legacy Web API to .NET 8    | In Progress | 1–2 days               | None                                         | Basic controller and models migrated |
+| Setup JWT Token Authentication      | In Progress | 0.5 day                | Review of token scopes/claims (if needed)    | Token generation logic under review  |
+| Implement Dapper Repository Pattern | In Progress | 1 day                  | None                                         | Core methods and structure outlined  |
+| Logging with ILogger and DB         | Planned     | 0.5–1 day              | App DB table for logging + schema access     | To be added after refactoring        |
+| API Response DTO Standardization    | Planned     | 0.5 day                | None                                         | After controller testing             |
+| Integration with Azure AD for Login | Blocked     | \~1 day (post unblock) | Access to AD group/policy from IT            | Directory validation issue pending   |
+| Push Code to Auth Branch (Git)      | Blocked     | 30 mins                | Help from DevOps to resolve permission issue | Git access error while pushing       |
