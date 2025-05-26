@@ -1,0 +1,32 @@
+Attendance
+| **Date**   | 1 | 2   | 3 | 4 | 5   | 6   | 7   | 8   | 9   | 10 | 11 | 12  | 13  | 14  | 15  | 16  | 17 | 18 | 19  | 20  | 21  | 22  | 23  | 24 | 25 | 26  | 27  | 28  | 29  | 30  | 31 |
+| ---------- | - | --- | - | - | --- | --- | --- | --- | --- | -- | -- | --- | --- | --- | --- | --- | -- | -- | --- | --- | --- | --- | --- | -- | -- | --- | --- | --- | --- | --- | -- |
+| **Day**    | T | F   | S | S | M   | T   | W   | T   | F   | S  | S  | M   | T   | W   | T   | F   | S  | S  | M   | T   | W   | T   | F   | S  | S  | M   | T   | W   | T   | F   | S  |
+| **Status** | H | WFH | - | - | WFH | WFO | WFO | WFH | WFO | -  | -  | WFH | WFO | WFO | WFH | WFO | -  | -  | WFH | WFO | WFO | WFH | WFH | -  | -  | WFH | WFO | WFO | WFH | WFO | -  |
+
+
+Here's the **Updated Work Summary for the Tension Management Portal** including **React app setup, infrastructure setup, VDI setup**, and **work done for estimates**, formatted cleanly in a horizontal table:
+
+---
+
+### Tension Management Portal – Major Work Summary
+
+| Major Item                                    | Status      | Description / Work Done                                                                  |
+| --------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------- |
+| React Application Setup                       | Completed   | Project initialized with Vite + TypeScript, folder structure organized, routing enabled. |
+| Infrastructure Setup (API & DB)               | Completed   | Backend service endpoints provisioned, DB schemas designed for tension workflows.        |
+| VDI & Environment Setup                       | Completed   | VDI configured for development, necessary SDKs and tools installed.                      |
+| Dynamic Form Configuration ("Create Tension") | Completed   | JSON-based schema system built for dynamic fields, rules, and validation.                |
+| Side Popup for "Create Tension"               | Completed   | Slide-in drawer with responsive layout built and connected to dynamic form.              |
+| Feature Cards on Homepage                     | Completed   | Navigation cards created for core features: Create, View, Inbox, Reports, etc.           |
+| Dropdown Options Integration                  | Completed   | Circle, Product, Customer options loaded from APIs or config files.                      |
+| Form Validation & Submission                  | Completed   | Hook-based form validation; integrated with backend for submission and feedback.         |
+| Work Estimation Breakdown                     | Completed   | Key features estimated for dev effort; shared in sprint planning docs.                   |
+| Role-based Field Visibility                   | In Progress | Logic for field-level visibility based on user roles being implemented.                  |
+| Draft Save & Resume                           | In Progress | Designing schema for draft records, with auto-save logic under development.              |
+| Replicating Figma / Power App UI              | In Progress | Matching layouts, spacing, and field interactions with reference designs.                |
+| Teams App Integration Workaround              | In Progress | Evaluating integration via tabs or adaptive cards inside Microsoft Teams.                |
+
+---
+
+Let me know if you'd like to turn this into a PowerPoint slide, Excel file, or a formatted status mail.
