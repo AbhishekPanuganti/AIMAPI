@@ -1,0 +1,25 @@
+
+namespace NLLCOMMONAPI
+{
+    using System;
+    
+    public partial class ra_validateemployee_Result
+    {
+        public string GlobalId { get; set; }
+        public string USER_NAME { get; set; }
+        public string EMAIL { get; set; }
+        public int USER_ID { get; set; }
+        public int dept { get; set; }
+        public string deptname { get; set; }
+        public Nullable<int> Functions { get; set; }
+        public string Functionname { get; set; }
+        public string RecommendedID { get; set; }
+        public string recommendmail { get; set; }
+        public string recommendname { get; set; }
+        public string FunctionalGID { get; set; }
+        public string functionalheadname { get; set; }
+        public string functionalmail { get; set; }
+        public Nullable<int> Gender { get; set; }
+        public string WhatsAppNumber { get; set; }
+    }
+}

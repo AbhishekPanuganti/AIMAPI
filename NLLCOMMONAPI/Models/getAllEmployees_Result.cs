@@ -1,0 +1,29 @@
+
+namespace NLLCOMMONAPI
+{
+    using System;
+    
+    public partial class getAllEmployees_Result
+    {
+        public int id { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public string adid { get; set; }
+        public Nullable<int> userid { get; set; }
+        public Nullable<int> createdby { get; set; }
+        public Nullable<System.DateTime> createdon { get; set; }
+        public Nullable<int> updatedby { get; set; }
+        public Nullable<System.DateTime> updatedon { get; set; }
+        public bool freezed { get; set; }
+        public string password { get; set; }
+        public string globalid { get; set; }
+        public Nullable<int> locationid { get; set; }
+        public Nullable<int> departmentid { get; set; }
+        public Nullable<int> subdepartmentid { get; set; }
+        public string managerid { get; set; }
+        public string hodid { get; set; }
+        public string departmentname { get; set; }
+        public string subdepartmentname { get; set; }
+    }
+}

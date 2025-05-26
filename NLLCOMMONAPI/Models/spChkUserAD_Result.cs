@@ -1,0 +1,29 @@
+
+namespace NLLCOMMONAPI
+{
+    using System;
+    
+    public partial class spChkUserAD_Result
+    {
+        public int USER_ID { get; set; }
+        public string USER_NAME { get; set; }
+        public string aduserid { get; set; }
+        public string FIRST_NAME { get; set; }
+        public string LAST_NAME { get; set; }
+        public string DEPARTMENT { get; set; }
+        public string LOCATION_TEXT { get; set; }
+        public int LOCATION { get; set; }
+        public int CODE { get; set; }
+        public int DEPT { get; set; }
+        public Nullable<int> LEVEL { get; set; }
+        public string Desig_value { get; set; }
+        public Nullable<int> Designation { get; set; }
+        public string Reporting_Authority { get; set; }
+        public string GLOBALID { get; set; }
+        public int AdvRoleId { get; set; }
+        public string Email { get; set; }
+        public int DeptNo { get; set; }
+        public Nullable<int> PositionType { get; set; }
+        public Nullable<int> Functions { get; set; }
+    }
+}

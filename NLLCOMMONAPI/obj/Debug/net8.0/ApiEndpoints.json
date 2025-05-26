@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_10",
+    "RelativePath": "",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "NLLCOMMONAPI.Controllers.AccountController",
     "Method": "Login",
     "RelativePath": "api/Account/login",
@@ -27,6 +43,22 @@
         "Name": "File",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NLLCOMMONAPI.Controllers.UserController",
+    "Method": "CheckQRLogin",
+    "RelativePath": "api/User/CheckQRLogin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "NLLCOMMONAPI.MUser",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

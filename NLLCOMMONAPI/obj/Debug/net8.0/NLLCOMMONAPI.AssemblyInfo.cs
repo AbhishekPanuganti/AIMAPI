@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NLLCOMMONAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ee68c70ff53a54754ac3db2d03943cc353a976e")]
 [assembly: System.Reflection.AssemblyProductAttribute("NLLCOMMONAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NLLCOMMONAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NLLCOMMONAPI.Service;
 using NLLCOMMONAPI.Models;
+using NLLCOMMONAPI.Data.Services;
 
 namespace NLLCOMMONAPI.Controllers
 {

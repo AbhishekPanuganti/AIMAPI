@@ -3,18 +3,22 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
-using NLLCOMMONAPI.Middleware;
-using NLLCOMMONAPI.Service;
 using System.Text;
-using Microsoft.Win32;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using NLLCOMMONAPI.Models;
-using Microsoft.AspNetCore.Http.Features;
+using NLLCOMMONAPI.Data.Interfaces;
+using NLLCOMMONAPI.Data.Repository;
+using NLLCOMMONAPI.Data.Services;
+using NLLCOMMONAPI.Data;
+using Microsoft.Data.SqlClient;
+using System.Data;
+using NLLCOMMONAPI.Data.Middleware;
 
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 builder.Services.Configure<FormOptions>(options =>
 {
     options.MultipartBodyLengthLimit = 5 * 1024 * 1024; // 5 MB
@@ -22,40 +26,35 @@ builder.Services.Configure<FormOptions>(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(MyAllowSpecificOrigins,
-                          policy =>
-                          {
-                              policy.WithOrigins("http://localhost:4200",
-                                                  "http://localhost:4201")
-                                                  .AllowAnyHeader()
-                                                  .AllowAnyMethod();
-                          });
+    options.AddPolicy(MyAllowSpecificOrigins, policy =>
+    {
+        policy.WithOrigins("http://localhost:4200", "http://localhost:4201")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
 
 builder.Services.AddRateLimiter(options =>
 {
     options.AddFixedWindowLimiter("Fixed", policy =>
     {
-        policy.PermitLimit = 100; // Allow 5 requests
-        policy.Window = TimeSpan.FromSeconds(10); // Every 10 seconds
+        policy.PermitLimit = 100;
+        policy.Window = TimeSpan.FromSeconds(10);
         policy.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        policy.QueueLimit = 20; // Allow 2 requests to queue
+        policy.QueueLimit = 20;
     });
 });
-
-//builder.Services.AddControllers();
 
 builder.Services.AddControllers(options =>
 {
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 });
 
-// Suppress detailed error messages in headers
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
     serverOptions.AddServerHeader = false; // Removes "Server" header
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -66,30 +65,28 @@ builder.Services.AddSwaggerGen(options =>
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.Http,
         Scheme = JwtBearerDefaults.AuthenticationScheme,
-        Description = "Enter your Bearer token",
+        Description = "Enter your Bearer token below:",
         Reference = new OpenApiReference
         {
             Id = JwtBearerDefaults.AuthenticationScheme,
             Type = ReferenceType.SecurityScheme
-            
         }
-
     };
+
     options.AddSecurityDefinition("Bearer", jwtSecurityScheme);
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
-        {
-            jwtSecurityScheme, Array.Empty<string>()
-        }
+        { jwtSecurityScheme, Array.Empty<string>() }
     });
-
 });
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+})
+.AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
     options.SaveToken = true;
@@ -104,59 +101,44 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true
     };
 });
+
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtService>();
-
-builder.Services.AddDbContext<Mdmdbcontext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IDbConnection>(sp =>
+    new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<DapperContext>();
+builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-
-// Use middleware to remove specific headers
-// Use middleware to remove specific headers
 app.Use(async (context, next) =>
 {
     context.Response.OnStarting(() =>
     {
-        // Remove the "Server" header
         context.Response.Headers.Remove("Server");
-
-        // Remove custom headers or other unwanted ones here
         context.Response.Headers.Remove("X-Powered-By");
-
         return Task.CompletedTask;
     });
 
     await next();
 });
 
-
-// Register the custom exception handling middleware
-app.UseMiddleware<ExceptionHandlingMiddleware>();
-
-
-// Map endpoints
-app.MapGet("/", (HttpContext context) => throw new Exception("Select a path"));
-
-app.UseCors(MyAllowSpecificOrigins);
+//app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseAntiXssMiddleware();
+//app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseRateLimiter();
 app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.MapGet("/", (HttpContext context) => Results.BadRequest("Specify a valid endpoint."));
 app.MapControllers();
-
-app.UseAntiXssMiddleware();
-app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseHsts();
-
 app.Run();

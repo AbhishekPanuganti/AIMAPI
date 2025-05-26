@@ -1,0 +1,22 @@
+
+namespace NLLCOMMONAPI
+{
+    using System;
+    
+    public partial class IMS_GetQueryListByGlobalId_Result
+    {
+        public int Id { get; set; }
+        public string QueryText { get; set; }
+        public string FileName { get; set; }
+        public string Filetype { get; set; }
+        public string Base64String { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatedOn { get; set; }
+        public string UpdatedBy { get; set; }
+        public string UpdatedOn { get; set; }
+        public string ResponseText { get; set; }
+        public string ResponseBy { get; set; }
+        public string ResponseOn { get; set; }
+        public string Status { get; set; }
+    }
+}

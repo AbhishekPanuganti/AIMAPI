@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NLLCOMMONAPI.Data.Services;
 using NLLCOMMONAPI.Models;
-using NLLCOMMONAPI.Service;
 
 namespace NLLCOMMONAPI.Controllers
 {

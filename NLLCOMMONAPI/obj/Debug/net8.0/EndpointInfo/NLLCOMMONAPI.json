@@ -68,6 +68,49 @@
         }
       }
     },
+    "/": {
+      "get": {
+        "tags": [
+          "NLLCOMMONAPI"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/User/CheckQRLogin": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MUser"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MUser"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Vapt/saveSystemlog": {
       "post": {
         "tags": [
@@ -167,6 +210,32 @@
         },
         "additionalProperties": false
       },
+      "MUser": {
+        "type": "object",
+        "properties": {
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "authenticationMode": {
+            "type": "string",
+            "nullable": true
+          },
+          "samAccountName": {
+            "type": "string",
+            "nullable": true
+          },
+          "adid": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "SystemlogModel": {
         "type": "object",
         "properties": {
@@ -216,7 +285,7 @@
     "securitySchemes": {
       "Bearer": {
         "type": "http",
-        "description": "Enter your Bearer token",
+        "description": "Enter your Bearer token below:",
         "scheme": "Bearer",
         "bearerFormat": "JWT"
       }

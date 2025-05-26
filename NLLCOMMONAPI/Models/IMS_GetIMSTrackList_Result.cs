@@ -1,0 +1,30 @@
+
+namespace NLLCOMMONAPI
+{
+    using System;
+    
+    public partial class IMS_GetIMSTrackList_Result
+    {
+        public Nullable<int> Id { get; set; }
+        public string IdeaCode { get; set; }
+        public string IdeaTitle { get; set; }
+        public string Description { get; set; }
+        public string EvaluationStatus { get; set; }
+        public Nullable<int> EvaluationStatusCode { get; set; }
+        public Nullable<System.DateTime> Createdon { get; set; }
+        public string Createdby { get; set; }
+        public string Createdbyname { get; set; }
+        public string CategoryCode { get; set; }
+        public string CategoryName { get; set; }
+        public string IdeaValueText { get; set; }
+        public string locationname { get; set; }
+        public string departmentname { get; set; }
+        public Nullable<double> AVG_EOI { get; set; }
+        public Nullable<double> AVG_CSP { get; set; }
+        public Nullable<double> Idea_score { get; set; }
+        public Nullable<bool> isboosted { get; set; }
+        public string shortlistremarks { get; set; }
+        public string awardingremarks { get; set; }
+        public string membertype { get; set; }
+    }
+}

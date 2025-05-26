@@ -1,0 +1,23 @@
+
+namespace NLLCOMMONAPI
+{
+    using System;
+    
+    public partial class getMenulist_Result
+    {
+        public int id { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public string menuicon { get; set; }
+        public string menuurl { get; set; }
+        public int parentid { get; set; }
+        public string remarks { get; set; }
+        public string parentname { get; set; }
+        public Nullable<int> createdby { get; set; }
+        public Nullable<System.DateTime> createdon { get; set; }
+        public Nullable<int> updatedby { get; set; }
+        public Nullable<System.DateTime> updatedon { get; set; }
+        public string createdbyname { get; set; }
+        public string updatedbyname { get; set; }
+    }
+}
