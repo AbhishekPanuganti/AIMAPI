@@ -1,0 +1,818 @@
+Received: from TYCP301CA0042.JPNP301.PROD.OUTLOOK.COM (2603:1096:400:380::10)
+ by PN2P287MB1023.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:137::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Mon, 26 May
+ 2025 19:18:12 +0000
+Received: from TY2PEPF0000AB89.apcprd03.prod.outlook.com
+ (2603:1096:400:380:cafe::ce) by TYCP301CA0042.outlook.office365.com
+ (2603:1096:400:380::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8769.27 via Frontend Transport; Mon,
+ 26 May 2025 19:18:11 +0000
+Authentication-Results: spf=softfail (sender IP is 52.172.33.253)
+ smtp.mailfrom=NEULANDLABS.COM; dkim=pass (signature was verified)
+ header.d=neulandlabs.com;dmarc=pass action=none header.from=NEULANDLABS.COM;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ NEULANDLABS.COM discourages use of 52.172.33.253 as permitted sender)
+Received: from NLL-AZ-DLP0121.neulandlabs.com (52.172.33.253) by
+ TY2PEPF0000AB89.mail.protection.outlook.com (10.167.253.7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.8769.18 via Frontend Transport; Mon, 26 May 2025 19:18:11 +0000
+Received: from PNZPR01CU001.outbound.protection.outlook.com (unknown [40.93.132.29])
+	(using TLSv1.2 with cipher AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by Forcepoint Email with ESMTPS id 2131979E6A4CE0B095C3;
+	Tue, 27 May 2025 00:48:10 +0530 (IST)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=puJ58fnGIR6BhPVN+Nz9N40dhciVDaVyGiWv9bXTLtT5GBdXLqRjypQp+8r4LwvxGt2T2BYXAvyAzJO2UGUeoN4jUTdTlJdbTI/LWXu66aYp2hYHeDGW9/9JfNQx2TJjCHAV22/O121h8TbTF32b1hO1crZSs7F+ghTaeG6X50js/fAnqDK/KFekru2tvE1gSFoGS0znqer8a/MyIuCyrJYq1lYOcWw3M6j+uOirK7bV/j8f44DNDGIOQHzhQYMG/qHU2Hzj70nOaFTO7i9DW480byj4ZHvDGIfuIl1fa+kjpQEDBU4pXHoFrK+7eEW4CzquNN1LykDVwJlGbLPb3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UN1WWQvOpY+hoRDP5SWemMINm6gy5/IqHAKnMkT7Hb4=;
+ b=xs6FOOiAFFSMnZAz054Vsl9hsrEHeqoEubAzIyCb0z/hXVyRxqWc/rw2CoZOzNDgnlZ1RcGwctlXW0Q96fPJqQ0MxSLSPDitAXGiYqf52R/orPii0toNJBDgjSMv8FqebTtOCAbbZAbiiDUtUinQ0nYSldu8/K/CNIqeX/KlCkZC0P/hwEDDty0rl3eNCMdJ9dq6fu8i0TIbsVMWAvOTmEYwPMDgCSw/3w9QWHWRWiuiEwhgC+kXi9q3q0nREJuseYie2P2X2duU1W3RlESEaEtNFcrrPKKDHo/NzhGE9jF4axyKqF82z+OOxO8WseI9DH5/TkaYE3fDSVb49NUsfA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=neulandlabs.com; dmarc=pass action=none
+ header.from=neulandlabs.com; dkim=pass header.d=neulandlabs.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=neulandlabs.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UN1WWQvOpY+hoRDP5SWemMINm6gy5/IqHAKnMkT7Hb4=;
+ b=Xqx9DNNBRo7vAHWJWSjJPr8pSCiv5WdPihpOOfDoT8Rz+Zz+34RC//cQwuuWpm3THbg+bVm+tW0UD7MbAzNG8hs9GjpwKXUGXhz7siMRFmZcDvelE3oJ1+/HRmR/fLEBvEvFKsvfeSEXUUyXWR6cQR4ZT3j9Cotq1nW77bzSxvk=
+Received: from MA0P287MB1068.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:f2::12)
+ by PN3PPF449796CF0.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::a0) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8769.26; Mon, 26 May
+ 2025 19:18:07 +0000
+Received: from MA0P287MB1068.INDP287.PROD.OUTLOOK.COM
+ ([fe80::74e2:bca1:3455:87d0]) by MA0P287MB1068.INDP287.PROD.OUTLOOK.COM
+ ([fe80::74e2:bca1:3455:87d0%7]) with mapi id 15.20.8769.025; Mon, 26 May 2025
+ 19:18:06 +0000
+From: Abhishek Panuganti <abhishekp@NEULANDLABS.COM>
+To: Kishan Guguloth <gkishan@neulandlabs.com>, Ramesh Kumar
+	<RameshKumar@neulandlabs.com>
+CC: "Gopalakrishna.janaswamy@quadranttechnologies.com"
+	<Gopalakrishna.janaswamy@quadranttechnologies.com>,
+	"amar@quadranttechnologies.com" <amar@quadranttechnologies.com>
+Subject: Weekly Project Update (19th May - 27th May ) - Abhishek Panuganti
+Thread-Topic: Weekly Project Update (19th May - 27th May ) - Abhishek
+ Panuganti
+Thread-Index: AQHbzm8sOmjTlaE2DEOYJ/Dc06r/8w==
+Date: Mon, 26 May 2025 19:18:06 +0000
+Message-ID: <PN0P287MB106184E3BDC53B0567FFB5F7B765A@PN0P287MB1061.INDP287.PROD.OUTLOOK.COM>
+Accept-Language: en-US
+Content-Language: en-US
+X-Mentions: gkishan@neulandlabs.com
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+msip_labels:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=NEULANDLABS.COM;
+x-ms-traffictypediagnostic: MA0P287MB1068:EE_|PN3PPF449796CF0:EE_|TY2PEPF0000AB89:EE_|PN2P287MB1023:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4227c725-6758-4edb-2acf-08dd9c8a0e31
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|1800799024|366016|376014|38070700018|8096899003|4053099003;
+X-Microsoft-Antispam-Message-Info-Original: =?us-ascii?Q?NDS+7Pq+cV+bMnSNqLg9+elUVZzS9XIeQkprWbfBrx6GA4udGQuAurGmko39?=
+ =?us-ascii?Q?tOoNXjEs8gtxMTfEPTcxPYTVbOUnsGW09csD2cpML4tVxG7eSUsHWao0nCHA?=
+ =?us-ascii?Q?kTRO8VVEKRolmCZUei380gEr0dj95T60n/Aa+yIQbm9QbJqxbPSg8KO5Frg5?=
+ =?us-ascii?Q?4upqNEu4gXwkgIHSOuwM7cKQbXVHSiiGhWJxyovXjrj6d+k2kad+oE/k1eXA?=
+ =?us-ascii?Q?pQxK08tt8qbAb9TKhV4sodPTgqW/1IRSSyF7ssIF+n1l/9ixxqidgm+++A/K?=
+ =?us-ascii?Q?1agoQ/TwATSMdRn/LtX1oJoyzrxZJ/ws2wiL4lBPe4Ds7QZHQMNJkteDxcHW?=
+ =?us-ascii?Q?8LCnRaNplIMqIzAxfVre7EYmeEYT//IB6vRk00BMHFbNNdZbHGG9gQ5rJCvY?=
+ =?us-ascii?Q?vtNc5jv/8WY4Qrx4aXoDjc+Kznj4/25QifCmrPMLK9KZnyj5klRuQTcWYAgy?=
+ =?us-ascii?Q?AJbXiQbRvjCaOPh5gms6pU2S5RXFLTVdzEA2a0R/beLdTLE6gJGheVjV1XxL?=
+ =?us-ascii?Q?oNGd9BzpFzyhMY8ASz6kY/GqDjnGQ6LoSW+FGqDeF3ggpfuC0oThI4z0pfZ9?=
+ =?us-ascii?Q?yOFsI0crqLW5hFCqKy4S3efqH8tcJm7PEdiTvDJ6fEhvTb+3swMzITTllal6?=
+ =?us-ascii?Q?ShBoBCaZIz2OWON1mRPkqG/OYyWpi73sMCfuQhV2fwMMKlepJTJAmttS2kz5?=
+ =?us-ascii?Q?Xtqq56H582X63h4BvoDwtgK18WH5CZ+9nlWNec23sACDq49ynV+CZUoUUD6K?=
+ =?us-ascii?Q?9jmZwm1DaMAGeNEqBrqTt9OSsOlsRMv8Rc+M2ELfq7AepWlZr04aVLRoQM1N?=
+ =?us-ascii?Q?/nMEsa0ljOtnF+qvdwi38FXiiEiCKotRiEdVuj3Rit4zju1hkAVOUWn9yo+L?=
+ =?us-ascii?Q?A9F5QL6VOZ36/HXwS5x+tAQs5rLhxtHq3TNKZSuqorA1jCVDywIAbYxqmeiq?=
+ =?us-ascii?Q?7l5WeBwwRp/qdTULVBpWSVFN7NUyyaB+CiEPb7oB/QMuHeqYJ4zGL6BF3FGq?=
+ =?us-ascii?Q?If/9kkZ1bjE/5F8lOmVpCC3+e+2KaXaLTC8cr1+N+JaPCvBThnxMHUNKyBOf?=
+ =?us-ascii?Q?x6uLTR5D5IZjKmRHL0bwpmdOyiknV8ND7Q6LkHiIx88Cg4zR4KvaXOYsBDkc?=
+ =?us-ascii?Q?VX0V9KcJSWZRSlEx5EnFhXKSrhWCyuhYKF05knEtz4iD6Psiz0zGjtNs94yh?=
+ =?us-ascii?Q?i8101XSRFqH95ZJUy8R4ZjsUk1Z/BdfLtLudhXrjrQHFLLxA8YM13SCakuG8?=
+ =?us-ascii?Q?YI8WsTNLvUlvUh8fWB7ru2YOO6NbKo05tuG+MkEIgicefMkNmudFds+OS3O1?=
+ =?us-ascii?Q?70GJRiG79iaUzLIU4b4f2JNWKIVssYHkdmC8mVMsbZMH5fO8toZW2u9BHFbd?=
+ =?us-ascii?Q?CqlFtrFsX3erkG4mtZwrdUtf9rh+MzrwVbOylI9SFgapaEX5mlJNZwBEkzXO?=
+ =?us-ascii?Q?c8+wrBSDfbc=3D?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MA0P287MB1068.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(38070700018)(8096899003)(4053099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?Windows-1252?Q?QP0wGx+QyPJGbTGPkRYCV1yJXg7qqQ8aLXpVNBhYuB8KMPw6OOORlORi?=
+ =?Windows-1252?Q?0HTvoRxPCVlkwd9lUGDKsEWosvb9droJq1SBMJTzDh/8s3eT+c21jRUc?=
+ =?Windows-1252?Q?jy2UjIctkWt02IWsxqCQj3Y2MRHNxg28Qgt32FKufQk7R6o7KCJmQ9ow?=
+ =?Windows-1252?Q?3tOzjj5YgLSSeBfJZggsax9ChCwRSM5jy1hHYaLJiaUAXRpSf6SygLCq?=
+ =?Windows-1252?Q?MkK8KCyzspkdWnX6O4ZJ585xyDezPgF1GsGwUK9rLilm/QZEfGpG8F2/?=
+ =?Windows-1252?Q?q/qJExQfD+VD8TalgVsdyBQ4hWgjQzycYzY+u2cJkQoOV4QhA6ZA0Php?=
+ =?Windows-1252?Q?/cUvYBEKfi2+u7kAkPpTf7MUYpjsA63HKE+lTT6i4MUUWGmlkQHM2vKb?=
+ =?Windows-1252?Q?beVhDALzJYx2cGApfs8WCiCrZLUcaxjSPYTFBhWoxXYqpuDohp1X5U0W?=
+ =?Windows-1252?Q?BifDpgUBuEfsgclwmzVvWw1gJvYl2rzfacF/BrbGDhCc5CTQM2zLNyYt?=
+ =?Windows-1252?Q?70Sg2lWHFM8Yi43A0b5eYJRKWzI7G03y36evbpQ4R6ybGc7aZ2hcccru?=
+ =?Windows-1252?Q?pO8q7mksASCdtU0WiQUvP/obk1CBMasCQLzZFW+7rtUVwmzGseWaiC79?=
+ =?Windows-1252?Q?12zQWQR2z+HAwtJWqmBggDGkUEpSg/m4E+K7+7jJYxBEAiiTfIMr3ZUX?=
+ =?Windows-1252?Q?S6UIgckw2IxPDpKpeS2le4ONJfVSdU/Fk3gpGPpUMEwJq90kHVW/OFMv?=
+ =?Windows-1252?Q?m2xRCJe6oAS33dEXfrvQR+mx3AywjwQDap+1GQN92SPqyVFcBafQvao4?=
+ =?Windows-1252?Q?UCAuJG3wXm963WXYpPAhGHOkpfoELVGJJGF/VU1Og2RHkY2Ihg9E7QmT?=
+ =?Windows-1252?Q?jiHbA3JgzEqDSXevHo55c4NpN0pkWtMZJoAVD+MnxJWvC9ncduYRFhuQ?=
+ =?Windows-1252?Q?/V7MpwY44yIJ4rJZQ1D3MKvTeN9QqGhUN++gn/7PEbBiqCA926Em3hJX?=
+ =?Windows-1252?Q?+VS946WxvfbYyIKYjxAGpOcSri13a0wT3I7zO5Mm7QJbh+3QzXd7/GLF?=
+ =?Windows-1252?Q?SikjIeUeURjMIivWcqc05Cu+yEQTK/efQSrMnRSKCK3qmnNeCCf4emSJ?=
+ =?Windows-1252?Q?kl8IliyDa8/R0s+Y/F8/pwNlVpoXbsiBPpBgjxVAyjnXeGgUNC4uJM3B?=
+ =?Windows-1252?Q?LqY3Q5cPjCCAzRTB02cAYmma3J3KaAuHX4Z4ftIucleAemB0NARySsVU?=
+ =?Windows-1252?Q?skkmP+jMzR4CZkioxAqLVDrVElV92wB7vPGBZVguVMx/vgSChjfn2oSQ?=
+ =?Windows-1252?Q?okDdEIddia47Yjg/nv5Pq4724nff20fmzfKE4Kv9QZa2ffCAC7MI7Ss9?=
+ =?Windows-1252?Q?0IRDISADt8rZo/bVJMMsKZAQnacqVqAIp34ms7/uAGmNnj1bsh+aaxa9?=
+ =?Windows-1252?Q?KGDXWJ0Qayzagr8S0PFNQAsYIJiqvBWXz/DOySJufOCIthpazGShYGla?=
+ =?Windows-1252?Q?Vjvxpf4B9iNGIQ4dAFhaim/B59NrnBRbr87WqaV+kQRY5Od+Li/pr+Ru?=
+ =?Windows-1252?Q?MAyX0Neyxsa2uDPxhVukMar8WIQSV1kGoMhwoNo+G7GTcCrUKBjT/6rf?=
+ =?Windows-1252?Q?izcu/7RSS3NHLyqSayY7pFFIu1mgaagJ3gsdhsrwWDNIaevF6nBfq1ya?=
+ =?Windows-1252?Q?siAnPP6qrQYPS27Vk9ksZP+3gX/X9NaO?=
+Content-Type: multipart/mixed;
+	boundary="_004_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_"
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: w8YD5rkanZUXminCr40DZ8hL1jEcteOS0zoYLq8qzZeTLvdiHPSCfZVjHvK9fDt8qsT+6j9oGw90efs/VzRp2tQ9el+RoLkiKANmNIAsqYqg+WJ0HhMD6tJx+HltBHqJMCVCm2c+2iwAMfSz1iZxQrBTD2pIW9zw2iPfGi8pkq1lcGct890jy4SOGTTgkdYp7QpyG8/Kj9cNED/UCGVRbUZDoh+F0lgg0L2vpVmKKglcbQQtLv1irP5684i6EB5RbhtVGmxNnKoPLIUSL6wWI3YKvaGUU1IVEd90ogDZgdFyE9JXmYa+4iToV5/8GCM5qZvfGn2ukmoqJYArRWy7iRas4MpahR+y2me7g9q63GB5V14sWN+bY6VA4cBDaE3Lp3zzbjjOSxkAfl+KDqgxIh+dLfrtQrZxKoFGZUI5QduCZuDWLllCLcoKTjHeliWbQxwHKGgGTJZ94TjHfIla1zKjXuRL2gZt+N5/5/kwQX4npvBVAawdjF3/DtJTkfNqw72xpHE8GWI3l9TerfFIeyjFhMebc652EITz11hUjyj8MTcK2QqeOl8sTAhQMZvHcO7Hg1Us3JEm9Dcal0CfrRIc8V1bBWn3ZRUFR0Fx1Yan/yXkVhzgDse9pHOLHSuu
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3PPF449796CF0
+Return-Path: abhishekp@NEULANDLABS.COM
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: TY2PEPF0000AB89.apcprd03.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-OriginatorOrg: NeulandLaboratories.onmicrosoft.com
+X-MS-Office365-Filtering-Correlation-Id-Prvs: c339ddcd-edba-4b4d-4ce6-08dd9c8a0b64
+MIME-Version: 1.0
+
+--_004_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_
+Content-Type: multipart/alternative;
+	boundary="_000_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_"
+
+--_000_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Hi @Kishan Guguloth<mailto:gkishan@neulandlabs.com>,
+Here's a quick update on my current work items and their status.
+Work Item
+Status
+ETA to Complete
+Support/Resources Required
+Remarks
+Migrate Legacy Web API to .NET 8
+In Progress
+1=962 days
+None
+Basic controller and models migrated
+Setup JWT Token Authentication
+In Progress
+0.5 day
+Review of token scopes/claims (if needed)
+Token generation logic under review
+Implement Dapper Repository Pattern
+In Progress
+1 day
+None
+Core methods and structure outlined
+Logging with ILogger and DB
+Planned
+0.5=961 day
+App DB table for logging + schema access
+To be added after refactoring
+API Response DTO Standardization
+Planned
+0.5 day
+None
+After controller testing
+Integration with Azure AD for Login
+Blocked
+~1 day (post unblock)
+Access to AD group/policy from IT
+Directory validation issue pending
+Push Code to Auth Branch (Git)
+Blocked
+30 mins
+Help from DevOps to resolve permission issue
+Git access error while pushing
+
+Please let me know if you need any further details or if there's anything I=
+ can do to help expedite the unblocking of these items.
+Please find Attached Work-Update and Attendance Sheet.
+Thanks,
+Abhishek Panuganti
+
+--_000_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div class=3D"elementToProof" style=3D"direction: ltr; line-height: 1.15; m=
+argin: 0px 0px 16px; display: block; font-family: Aptos, Aptos_EmbeddedFont=
+, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; col=
+or: rgb(0, 0, 0);">
+Hi <a href=3D"mailto:gkishan@neulandlabs.com" id=3D"OWAAM773435" class=3D"t=
+WKOu mention ms-bgc-nlr ms-fcl-b">
+@Kishan Guguloth</a>,</div>
+<div style=3D"direction: ltr; line-height: 1.15; margin: 0px 0px 16px; disp=
+lay: block; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Ca=
+libri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+Here's a quick update on my current work items and their status.</div>
+<table data-sourcepos=3D"7:1-15:134" style=3D"direction: ltr; line-height: =
+1.15; display: table; margin: 0px 0px 32px; color: rgb(27, 28, 29);">
+<tbody>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td style=3D"direction: ltr; line-height: 1.15; border-width: 1px; border-s=
+tyle: solid; border-color: initial; background-color: rgb(248, 250, 253); p=
+adding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"font-weight: 700;">Work Item</span></div>
+</td>
+<td style=3D"direction: ltr; line-height: 1.15; border-width: 1px; border-s=
+tyle: solid; border-color: initial; background-color: rgb(248, 250, 253); p=
+adding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"font-weight: 700;">Status</span></div>
+</td>
+<td style=3D"direction: ltr; line-height: 1.15; border-width: 1px; border-s=
+tyle: solid; border-color: initial; background-color: rgb(248, 250, 253); p=
+adding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"font-weight: 700;">ETA to Complete</span></div>
+</td>
+<td style=3D"direction: ltr; line-height: 1.15; border-width: 1px; border-s=
+tyle: solid; border-color: initial; background-color: rgb(248, 250, 253); p=
+adding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"font-weight: 700;">Support/Resources Required</span></div>
+</td>
+<td style=3D"direction: ltr; line-height: 1.15; border-width: 1px; border-s=
+tyle: solid; border-color: initial; background-color: rgb(248, 250, 253); p=
+adding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+<span style=3D"font-weight: 700;">Remarks</span></div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"9:1-9:34" style=3D"direction: ltr; line-height: 1.15;=
+ border-width: 1px; border-style: solid; border-color: initial; background-=
+color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Migrate Legacy Web API to .NET 8</div>
+</td>
+<td data-sourcepos=3D"9:36-9:48" style=3D"direction: ltr; line-height: 1.15=
+; border-width: 1px; border-style: solid; border-color: initial; background=
+-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+In Progress</div>
+</td>
+<td data-sourcepos=3D"9:50-9:59" style=3D"direction: ltr; line-height: 1.15=
+; border-width: 1px; border-style: solid; border-color: initial; background=
+-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+1=962 days</div>
+</td>
+<td data-sourcepos=3D"9:61-9:66" style=3D"direction: ltr; line-height: 1.15=
+; border-width: 1px; border-style: solid; border-color: initial; background=
+-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+None</div>
+</td>
+<td data-sourcepos=3D"9:68-9:105" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Basic controller and models migrated</div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"10:1-10:32" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Setup JWT Token Authentication</div>
+</td>
+<td data-sourcepos=3D"10:34-10:46" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+In Progress</div>
+</td>
+<td data-sourcepos=3D"10:48-10:56" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+0.5 day</div>
+</td>
+<td data-sourcepos=3D"10:58-10:100" style=3D"direction: ltr; line-height: 1=
+.15; border-width: 1px; border-style: solid; border-color: initial; backgro=
+und-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Review of token scopes/claims (if needed)</div>
+</td>
+<td data-sourcepos=3D"10:102-10:138" style=3D"direction: ltr; line-height: =
+1.15; border-width: 1px; border-style: solid; border-color: initial; backgr=
+ound-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);"=
+>
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Token generation logic under review</div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"11:1-11:37" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Implement Dapper Repository Pattern</div>
+</td>
+<td data-sourcepos=3D"11:39-11:51" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+In Progress</div>
+</td>
+<td data-sourcepos=3D"11:53-11:59" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+1 day</div>
+</td>
+<td data-sourcepos=3D"11:61-11:66" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+None</div>
+</td>
+<td data-sourcepos=3D"11:68-11:104" style=3D"direction: ltr; line-height: 1=
+.15; border-width: 1px; border-style: solid; border-color: initial; backgro=
+und-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Core methods and structure outlined</div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"12:1-12:29" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Logging with ILogger and DB</div>
+</td>
+<td data-sourcepos=3D"12:31-12:39" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Planned</div>
+</td>
+<td data-sourcepos=3D"12:41-12:51" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+0.5=961 day</div>
+</td>
+<td data-sourcepos=3D"12:53-12:94" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+App DB table for logging + schema access</div>
+</td>
+<td data-sourcepos=3D"12:96-12:126" style=3D"direction: ltr; line-height: 1=
+.15; border-width: 1px; border-style: solid; border-color: initial; backgro=
+und-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+To be added after refactoring</div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"13:1-13:34" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+API Response DTO Standardization</div>
+</td>
+<td data-sourcepos=3D"13:36-13:44" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Planned</div>
+</td>
+<td data-sourcepos=3D"13:46-13:54" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+0.5 day</div>
+</td>
+<td data-sourcepos=3D"13:56-13:61" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+None</div>
+</td>
+<td data-sourcepos=3D"13:63-13:88" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+After controller testing</div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"14:1-14:37" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div class=3D"elementToProof" style=3D"direction: ltr; line-height: 1.15; f=
+ont-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Calibri, Helvet=
+ica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+Integration with Azure AD for Login</div>
+</td>
+<td data-sourcepos=3D"14:39-14:47" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Blocked</div>
+</td>
+<td data-sourcepos=3D"14:49-14:71" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+~1 day (post unblock)</div>
+</td>
+<td data-sourcepos=3D"14:73-14:107" style=3D"direction: ltr; line-height: 1=
+.15; border-width: 1px; border-style: solid; border-color: initial; backgro=
+und-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Access to AD group/policy from IT</div>
+</td>
+<td data-sourcepos=3D"14:109-14:144" style=3D"direction: ltr; line-height: =
+1.15; border-width: 1px; border-style: solid; border-color: initial; backgr=
+ound-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);"=
+>
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Directory validation issue pending</div>
+</td>
+</tr>
+<tr style=3D"background-color: rgba(0, 0, 0, 0);">
+<td data-sourcepos=3D"15:1-15:32" style=3D"direction: ltr; line-height: 1.1=
+5; border-width: 1px; border-style: solid; border-color: initial; backgroun=
+d-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Push Code to Auth Branch (Git)</div>
+</td>
+<td data-sourcepos=3D"15:34-15:42" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Blocked</div>
+</td>
+<td data-sourcepos=3D"15:44-15:52" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+30 mins</div>
+</td>
+<td data-sourcepos=3D"15:54-15:99" style=3D"direction: ltr; line-height: 1.=
+15; border-width: 1px; border-style: solid; border-color: initial; backgrou=
+nd-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);">
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Help from DevOps to resolve permission issue</div>
+</td>
+<td data-sourcepos=3D"15:101-15:132" style=3D"direction: ltr; line-height: =
+1.15; border-width: 1px; border-style: solid; border-color: initial; backgr=
+ound-color: rgb(248, 250, 253); padding: 8px 12px; color: rgb(27, 28, 29);"=
+>
+<div style=3D"direction: ltr; line-height: 1.15; font-family: Aptos, Aptos_=
+EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-siz=
+e: 12pt; color: rgb(0, 0, 0);">
+Git access error while pushing</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div style=3D"direction: ltr; line-height: 1.15; margin: 0px 0px 8px; displ=
+ay: block; font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, Cal=
+ibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"direction: ltr; line-height: 1.15; m=
+argin: 0px 0px 16px; display: block; font-family: Aptos, Aptos_EmbeddedFont=
+, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; col=
+or: rgb(0, 0, 0);">
+Please let me know if you need any further details or if there's anything I=
+ can do to help expedite the unblocking of these items.</div>
+<div class=3D"elementToProof" style=3D"direction: ltr; line-height: 1.15; m=
+argin: 0px 0px 16px; display: block; font-family: Aptos, Aptos_EmbeddedFont=
+, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; col=
+or: rgb(0, 0, 0);">
+Please find Attached Work-Update and Attendance Sheet.</div>
+<div class=3D"elementToProof" style=3D"direction: ltr; line-height: 1.15; m=
+argin-top: 0px; margin-bottom: 1em; font-family: Aptos, Aptos_EmbeddedFont,=
+ Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+Thanks,</div>
+<div class=3D"elementToProof" style=3D"direction: ltr; line-height: 1.15; m=
+argin-top: 0px; margin-bottom: 1em; font-family: Aptos, Aptos_EmbeddedFont,=
+ Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; colo=
+r: rgb(0, 0, 0);">
+Abhishek Panuganti</div>
+</body>
+</html>
+
+--_000_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_--
+
+--_004_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;
+	name="Abhishek Panuganti Work Updates MAY 2025.xlsx"
+Content-Description: Abhishek Panuganti Work Updates MAY 2025.xlsx
+Content-Disposition: attachment;
+	filename="Abhishek Panuganti Work Updates MAY 2025.xlsx"; size=11944;
+	creation-date="Mon, 26 May 2025 19:13:04 GMT";
+	modification-date="Mon, 26 May 2025 19:13:22 GMT"
+Content-Transfer-Encoding: base64
+
+UEsDBBQABgAIAAAAIQD92BY2bQEAAJUFAAATAAgCW0NvbnRlbnRfVHlwZXNdLnhtbCCiBAIooAAC
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADE
+VMtOAjEU3Zv4D5NuzUyBhTGGgYWPpZKoH1DbC9PQV3oLwt97p4AxZgQJJG6mmWnPo+dMOxyvrCmW
+EFF7V7N+1WMFOOmVdrOavb0+ljeswCScEsY7qNkakI1HlxfD13UALAjtsGZNSuGWc5QNWIGVD+Bo
+ZuqjFYle44wHIediBnzQ611z6V0Cl8rUcrDR8B6mYmFS8bCizxsnEQyy4m6zsNWqmQjBaCkSOeVL
+p36olFuFipB5DTY64BXZYLxToZ35XWCLe6ZoolZQTERMT8KSDb4y/MPH+bv382o/SYdLP51qCcrL
+haUEKgwRhMIGIFlT5bGyQrud7y59Ak+iD0gxRjjewS6nFl0GIoKYNHwltVeRKjh5y9CWrEAdqy0X
+mLw9WX5D80fxbdW5F+R56J+58/ZXysT7Ku/wMfgnH4mOOPD8PD2KTHNg45jWBvDcJy2THlJuRAT1
+kiJdhmc38J1754PnS3X0CQAA//8DAFBLAwQUAAYACAAAACEAE16+ZQIBAADfAgAACwAIAl9yZWxz
+Ly5yZWxzIKIEAiigAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAKySTUsDMRCG74L/Icy9O9sqItJsL0XoTWT9ATGZ/WA3mZCkuv33RkF0obYe
+epyvd555mfVmsqN4oxB7dhKWRQmCnGbTu1bCS/24uAcRk3JGjexIwoEibKrrq/UzjSrlodj1Poqs
+4qKELiX/gBh1R1bFgj25XGk4WJVyGFr0Sg+qJVyV5R2G3xpQzTTFzkgIO3MDoj74vPm8NjdNr2nL
+em/JpSMrkKZEzpBZ+JDZQurzNaJWoaUkwbB+yumIyvsiYwMeJ1r9n+jva9FSUkYlhZoDneb57DgF
+tLykRXMTf9yZRnznMLwyD6dYbi/JovcxsT1jzlfPNxLO3rL6AAAA//8DAFBLAwQUAAYACAAAACEA
+ovGqOhgDAADRBwAADwAAAHhsL3dvcmtib29rLnhtbKxUbU/bMBD+Pmn/wfL3EDt12jSiRS1JNDRg
+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
+
+--_004_PN0P287MB106184E3BDC53B0567FFB5F7B765APN0P287MB1061INDP_--
