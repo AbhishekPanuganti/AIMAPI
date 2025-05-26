@@ -1,0 +1,6 @@
+@NLLCOMMONAPI_HostAddress = http://localhost:5198
+
+GET {{NLLCOMMONAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
